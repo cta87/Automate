@@ -6,9 +6,9 @@
 
     <title>NZTA Automated Results</title>
 
-    <script type="text/javascript"></script>
-    <script type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="dummy-data.js"></script>
+    <script type="text/javascript" src="results.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -23,6 +23,8 @@
 </head>
 
 <body>
+
+<!--Navbar component-->
 <div class="row">
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark nav-fill w-100 fixed-top">
@@ -40,33 +42,49 @@
     </nav>
 </div>
 
-
+<!--Test-suite component-->
 <div class="container" style="margin-top: 70px">
-    <div class="row">
-        <div class="col">
 
             <div class="row">
-                <div class="col bg-dark text-white">
+                <div class="col-4 bg-dark">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-light dropdown-toggle m-2">Test-Suite</button>
+                    </div>
+                </div>
+
+                <div class="col-4 bg-dark text-white">
                     <h3 class="text-center">Results Cards</h3>
                 </div>
+
+                <div class="col-3 bg-dark text-white just">
+
+                </div>
+
+                <div class="col-1 bg-dark text-white justify-content-end p-1">
+                    <div class="spinner-border text-primary"></div>
+                </div>
+
             </div>
+
 
             <div class="row justify-content-center bg-dark">
                 <div class="card m-2">
                     <div class="card-header">Test-suite-name</div>
-                    <div class="card-body">
-                    </div>
+                    <div class="card-body"></div>
                 </div>
                 <div class="card m-2">
-                    <div class="card-body">Basic card</div>
+                    <div class="card-header">Test-suite-name</div>
+                    <div class="card-body"></div>
+                </div>
+                <div class="card m-2">
+                    <div class="card-header">Test-suite-name</div>
+                    <div class="card-body"></div>
                 </div>
             </div>
 
         </div>
 
-    </div>
-</div>
-
+<!--Test results component-->
 <div class="container">
     <div class="row">
 
@@ -74,13 +92,13 @@
 
             <h3 class="text-center">Detailed results</h3>
 
-            <table class="table table-bordered">
+            <table id="resultTable" class="table table-bordered">
                 <thead class="thead-dark">
-                    <tr><td>Log</td><td>Test-name</td><td>Description</td><td>Result</td><td>Note</td><td>Mark as investigated</td></tr>
+                    <tr><td>Logs</td><td>Test-name</td><td>Description</td><td>Result</td><td>Note</td><td>Reviewed</td></tr>
                 </thead>
                 <tbody>
-                <tr><td id="sumrow" class="text-center" style="cursor: pointer">+</td><td>Test-1</td><td>Description</td><td class="text-success">Pass</td><td><input type="text" placeholder="Make note"><button class="btn btn-success">Send</button></td><td>Mark as investigated</td></tr>
-                <tr class="bg-light" id="logrow"><td colspan="6">
+                <tr><td class="text-center sumrow" style="cursor: pointer">+</td><td>Test-1</td><td>Description</td><td class="text-success">Pass</td><td><input type="text" placeholder="Make note"><button class="btn btn-success">Send</button></td><td class="justify-content-center"><input type="checkbox" checked></td></tr>
+                <tr class="bg-light"><td colspan="6">
                     <ul>
                         <li>Log entry 1</li>
                         <li>Log entry 2</li>
@@ -89,8 +107,16 @@
                     </ul>
 
                 </td></tr>
-                <tr><td class="text-center" style="cursor: pointer">+</td><td>Test-1</td><td>Description</td><td class="text-danger">Fail</td><td><input type="text" placeholder="Make note"><button class="btn btn-success">Send</button></td><td>Mark as investigated</td></tr>
+                <tr><td class="text-center sumrow btn-light text-secondary" style="cursor: pointer">+</td><td>Test-1</td><td>Description</td><td class="text-danger">Fail</td><td><input type="text" placeholder="Make note"><button class="btn btn-success">Send</button></td><td><input type="checkbox"></td></tr>
+                <tr class="bg-light"><td colspan="6">
+                    <ul>
+                        <li>Log entry 1</li>
+                        <li>Log entry 2</li>
+                        <li>Log entry 3</li>
+                        <li>Log entry 4</li>
+                    </ul>
 
+                </td></tr>
 
                 </tbody>
             </table>
@@ -101,27 +127,7 @@
 </div>
 
 
-
-
-
-
 </body>
-
-<script>
-
-    $(document).ready(()=>{
-        console.log("Jquery ready");
-
-        $("#sumrow").on('click', (event)=>{
-
-            console.log(event.currentTarget);
-
-           $("#logrow").toggle();
-        });
-
-    });
-
-</script>
 
 
 </html>
