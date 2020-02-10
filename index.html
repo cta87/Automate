@@ -46,40 +46,47 @@
 <div class="container" style="margin-top: 70px">
 
             <div class="row">
-                <div class="col-4 bg-dark">
+                <div class="col-4 bg-dark pl-0">
                     <div class="dropdown">
-                        <button type="button" class="btn btn-light dropdown-toggle m-2">Test-Suite</button>
+                        <button type="button" class="btn btn-light dropdown-toggle m-2">Test-Set</button>
                     </div>
                 </div>
 
                 <div class="col-4 bg-dark text-white">
-                    <h3 class="text-center">Results Cards</h3>
+                    <h3 class="text-center">Executed Test Sets</h3>
                 </div>
 
                 <div class="col-3 bg-dark text-white just">
 
                 </div>
 
-                <div class="col-1 bg-dark text-white justify-content-end p-1">
-                    <div class="spinner-border text-primary"></div>
+                <div class="col-1 bg-dark text-white p-1">
+                    <div id="loading-spinner" class="spinner-border text-primary float-right m-1" style="display: none"></div>
                 </div>
 
             </div>
 
 
-            <div class="row justify-content-center bg-dark">
+            <div id='tstset-card-container' class="row justify-content-center bg-dark">
+
+
                 <div class="card m-2">
-                    <div class="card-header">Test-suite-name</div>
-                    <div class="card-body"></div>
+                    <div class="card-header">01_basic_checks</div>
+                    <div class="card-body bg-light p-1">
+                        <p class="card-text text-center  m-0" ><kbd>11/11/11</kbd></p>
+                        <p class="card-text text-center  m-0"><kbd>Complete</kbd></p>
+                        <p class="card-text text-center  m-0"><kbd>main-20191203-2</kbd></p>
+
+                        <p class="card-text text-danger font-weight-bold text-center mt-1 m-0">Fail: 2</p>
+                        <p class="card-text text-success font-weight-bold text-center m-0">Pass: 2</p>
+                        <p class="card-text text-warning font-weight-bold text-center m-0">Error: 2</p>
+
+                        <div class="row justify-content-center mt-2">
+                            <button class="btn btn-secondary stretched-link open-test-set">Open</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="card m-2">
-                    <div class="card-header">Test-suite-name</div>
-                    <div class="card-body"></div>
-                </div>
-                <div class="card m-2">
-                    <div class="card-header">Test-suite-name</div>
-                    <div class="card-body"></div>
-                </div>
+
             </div>
 
         </div>
@@ -92,31 +99,31 @@
 
             <h3 class="text-center">Detailed results</h3>
 
-            <table id="resultTable" class="table table-bordered">
+            <table id="resultTable" class="table table-bordered table-sm">
                 <thead class="thead-dark">
                     <tr><td>Logs</td><td>Test-name</td><td>Description</td><td>Result</td><td>Note</td><td>Reviewed</td></tr>
                 </thead>
                 <tbody>
-                <tr><td class="text-center sumrow" style="cursor: pointer">+</td><td>Test-1</td><td>Description</td><td class="text-success">Pass</td><td><input type="text" placeholder="Make note"><button class="btn btn-success">Send</button></td><td class="justify-content-center"><input type="checkbox" checked></td></tr>
-                <tr class="bg-light"><td colspan="6">
-                    <ul>
-                        <li>Log entry 1</li>
-                        <li>Log entry 2</li>
-                        <li>Log entry 3</li>
-                        <li>Log entry 4</li>
-                    </ul>
+                <!--<tr><td class="text-center sumrow" style="cursor: pointer">+</td><td>Test-1</td><td>Description</td><td class="text-success">Pass</td><td><input type="text" placeholder="Make note"><button class="btn btn-success">Send</button></td><td class="justify-content-center"><input type="checkbox" checked></td></tr>-->
+                <!--<tr class="bg-light"><td colspan="6">-->
+                    <!--<ul>-->
+                        <!--<li>Log entry 1</li>-->
+                        <!--<li>Log entry 2</li>-->
+                        <!--<li>Log entry 3</li>-->
+                        <!--<li>Log entry 4</li>-->
+                    <!--</ul>-->
 
-                </td></tr>
-                <tr><td class="text-center sumrow btn-light text-secondary" style="cursor: pointer">+</td><td>Test-1</td><td>Description</td><td class="text-danger">Fail</td><td><input type="text" placeholder="Make note"><button class="btn btn-success">Send</button></td><td><input type="checkbox"></td></tr>
-                <tr class="bg-light"><td colspan="6">
-                    <ul>
-                        <li>Log entry 1</li>
-                        <li>Log entry 2</li>
-                        <li>Log entry 3</li>
-                        <li>Log entry 4</li>
-                    </ul>
+                <!--</td></tr>-->
+                <!--<tr><td class="text-center sumrow btn-light text-secondary" style="cursor: pointer">+</td><td>Test-1</td><td>Description</td><td class="text-danger">Fail</td><td><input type="text" placeholder="Make note"><button class="btn btn-success">Send</button></td><td><input type="checkbox"></td></tr>-->
+                <!--<tr class="bg-light"><td colspan="6">-->
+                    <!--<ul>-->
+                        <!--<li>Log entry 1</li>-->
+                        <!--<li>Log entry 2</li>-->
+                        <!--<li>Log entry 3</li>-->
+                        <!--<li>Log entry 4</li>-->
+                    <!--</ul>-->
 
-                </td></tr>
+                <!--</td></tr>-->
 
                 </tbody>
             </table>
