@@ -1,6 +1,5 @@
 $(document).ready(()=>{
     console.log("Jquery ready");
-    console.log(dummyData);
 
     // =========================== Click methods ========================================
     $("#resultTable").on('click', ".sumrow", (event)=>{                 /// using this method any dynamically added elements will still function with the click
@@ -11,26 +10,73 @@ $(document).ready(()=>{
 
     });
 
-    addTest(dummyData[0]);
-    addTest(dummyData[1]);
-    addTest(dummyData[2]);
-    addTest(dummyData[3]);
+
+
+    // below function populates the test table when a test-set is clicked
+    $("#tstset-card-container").on('click', '.open-test-set', (event)=>{
+
+        $("#loading-spinner").show();
+        //$(event.currentTarget).parent().next().toggle();
+
+        //add blue border around card that is open
+        console.log($(event.currentTarget).parent().parent().parent().addClass('border-primary'));
+
+        // remove blue border off all other cards
+
+        $(event.currentTarget).text("Opened");
+
+        $(event.currentTarget).removeClass('btn-secondary').addClass('btn-primary');
+
+        const id = $(event.currentTarget).prop("id");
+
+        //get data from mysql using id
+
+            // if mysql unavalible then use dummy data
+
+        console.log(id);
+
+        if(true === false){
+
+        } else {
+            let data = JSON.parse(dummyData3[id].results_json);
+
+            for (dataIndex in data){
+
+                addTestRows(data[dataIndex]);
+            }
+        }
+
+
+    });
+
+
+    // temp code
+
+    for (dataIndex in dummyData3){
+
+        addTestSetCard(dummyData3[dataIndex]);
+    }
+
 
 });
 
+
+
 // ============================== Element templates (use .clone() to copy them) ===============================
 
-const noteTemplate = $("<td></td>").append($("<input>").attr("type", 'input'), $("<button></button>").text("Update").addClass('btn btn-success'));
+// const noteTemplate = $("<td></td>").append($("<input>").attr("type", 'input'), $("<button></button>").text("Update").addClass('btn btn-success'));
+const noteTemplate = $("<td></td>").append($("<input>").attr("type", 'input'));
 
 // ============================== Functions to create HTML elements ===============================
 
-const addTest = (testObj) =>{
+// Function creates a row in the test table with info from the individual test
+const addTestRows = (testObj) =>{
     // create row elements
     let summaryRow = $("<tr></tr>");
     let logRow = $("<tr></tr>").addClass('bg-light').hide(); //hides log row
 
     // create table-data elements
-    let tdName = $('<td></td>').text(testObj.name);
+    let tdName = $('<td></td>').text(testObj.test);
     let tdDesc = $('<td></td>').text(testObj.description);
     let tdResult = $('<td></td>').text(testObj.result).addClass('font-weight-bold');
     let tdNote = noteTemplate.clone();
@@ -64,16 +110,53 @@ const addTest = (testObj) =>{
     //Create log list element
     let logList = $("<ol></ol>");
 
-    for (logIndex in testObj.log){
-        logList.append($("<li></li>").text(testObj.log[logIndex]));
+    if(testObj.log){  // if log exists
+        for (logIndex in testObj.log){
+            logList.append($("<li></li>").text(testObj.log[logIndex]));
+        }
+
+        // append row data to row
+        summaryRow.append($('<td></td>').addClass('text-center sumrow btn-light text-info').text("(" + testObj.log.length + ")"), tdName, tdDesc, tdResult, tdNote, tdReview);
+    } else {
+        summaryRow.append($('<td></td>').addClass('text-center sumrow btn-light text-info').text("(N/A)"), tdName, tdDesc, tdResult, tdNote, tdReview);
     }
 
-    // append row data to row
 
-    summaryRow.append($('<td></td>').addClass('text-center sumrow btn-light text-info').text("(" + testObj.log.length + ")"), tdName, tdDesc, tdResult, tdNote, tdReview);
     logRow.append($("<td></td>").attr('colspan', '6').append(logList));
+
 
     //change this to a return
     $("#resultTable").append(summaryRow, logRow);
+
+};
+
+const addTestSetCard = (testSetObj) =>{
+    let container = $('#tstset-card-container');
+
+    // create card
+    let cardContainer = $("<div></div>").addClass('card m-2');
+
+    // create card header
+    let cardHead = $("<div></div>").addClass('card-header').text(testSetObj.name);
+
+    // create card body
+    let cardBody = $("<div></div>").addClass('card-body bg-light p-1');
+
+        // create card body elements
+        let dateP = $('<p></p>').addClass('card-text text-center m-0').append($("<kbd></kbd>").text(testSetObj.start_time));
+        let statusP = $('<p></p>').addClass('card-text text-center m-0').append($("<kbd></kbd>").text(testSetObj.status));
+        let buildP = $('<p></p>').addClass('card-text text-center m-0').append($("<kbd></kbd>").text(testSetObj.build_name));
+
+        let failP = $('<p></p>').addClass('card-text text-danger font-weight-bold text-center mt-1 m-0').text("Fail: " +  testSetObj.fail);
+        let passP = $('<p></p>').addClass('card-text text-success font-weight-bold text-center m-0').text("Pass: " +  testSetObj.pass);
+        let errorP = $('<p></p>').addClass('card-text text-warning font-weight-bold text-center m-0').text("Error: " +  testSetObj.error);
+
+        // create open button
+        let openBtn = $("<div></div>").addClass("row justify-content-center mt-2").append($("<button></button>").addClass("btn btn-secondary stretched-link open-test-set").text("Open").prop("id", testSetObj.id));
+
+        // create card with all appended children
+    cardContainer.append(cardHead, cardBody.append(dateP, statusP, buildP, failP, passP, errorP, openBtn));
+    container.append(cardContainer);
+
 
 };
