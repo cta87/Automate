@@ -7,6 +7,9 @@
     <title>NZTA Automated Results</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
     <script type="text/javascript" src="dummy-data.js"></script>
     <script type="text/javascript" src="results.js"></script>
 
@@ -42,13 +45,18 @@
     </nav>
 </div>
 
-<!--Test-suite component-->
+<!--Test-set component-->
 <div class="container" style="margin-top: 70px">
 
             <div class="row">
                 <div class="col-4 bg-dark pl-0">
                     <div class="dropdown">
-                        <button type="button" class="btn btn-light dropdown-toggle m-2">Test-Set</button>
+                        <button type="button" class="btn btn-light dropdown-toggle m-2" data-toggle="dropdown">Test-Set</button>
+                        <div id="tst-sel-drop" class="dropdown-menu">
+
+                            <button class="dropdown-item">Select All</button>
+                            <div class="dropdown-divider"></div>
+                        </div>
                     </div>
                 </div>
 

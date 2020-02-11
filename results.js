@@ -50,12 +50,19 @@ $(document).ready(()=>{
     });
 
 
-    // temp code
+    // Page load Code
+
+    let testSetArray = [];
 
     for (dataIndex in dummyData3){
 
+        testSetArray.push(dummyData3[dataIndex].name);
+
         addTestSetCard(dummyData3[dataIndex]);
     }
+
+
+    popSetDropdown(testSetArray);  // run function that populates the test-set name select dropdown, should only contain unique values
 
 
 });
@@ -158,5 +165,23 @@ const addTestSetCard = (testSetObj) =>{
     cardContainer.append(cardHead, cardBody.append(dateP, statusP, buildP, failP, passP, errorP, openBtn));
     container.append(cardContainer);
 
+
+};
+
+// Function that populates the test-set name select dropdown
+const popSetDropdown = (nameArray) => {
+
+    const tstSelEle = $("#tst-sel-drop");
+
+    let uniqueNames = [];
+    $.each(nameArray, function(i, el){
+        if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+    });
+
+
+    for (index in uniqueNames){
+        let dropItem = $('<button></button>').addClass('dropdown-item').text(uniqueNames[index]);
+        tstSelEle.append(dropItem);
+    }
 
 };
