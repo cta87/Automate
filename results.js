@@ -17,9 +17,6 @@ $(document).ready(()=>{
     // below function populates the test table when a test-set is clicked
     $("#tstset-card-container").on('click', '.open-test-set', (event)=>{
 
-        $("#loading-spinner").show();
-        //$(event.currentTarget).parent().next().toggle();
-
         //add blue border around card that is open
         console.log($(event.currentTarget).parent().parent().parent().addClass('border-primary'));
 
@@ -38,17 +35,6 @@ $(document).ready(()=>{
         console.log(id);
 
         dataFgetTests(id);
-
-        // if(true === false){
-        //
-        // } else {
-        //     let data = JSON.parse(dummyData3[id].results_json);
-        //
-        //     for (dataIndex in data){
-        //
-        //         addTestRows(data[dataIndex]);
-        //     }
-        // }
 
 
     });
@@ -181,4 +167,14 @@ const popSetDropdown = (nameArray) => {
         tstSelEle.append(dropItem);
     }
 
+};
+
+// Function to show/hide loading circle, true = show, false = hide.
+
+const loading = (IO) => {
+  if (IO){
+      $("#loading-spinner").show();
+  } else{
+      $("#loading-spinner").hide();
+  }
 };

@@ -13,6 +13,7 @@ const datafUrls ={
 
 // Function get the last 5 test sets and populates the test set table
 const datafgetTestSets = async () => {
+    loading(true);
 
     let testSetArray = [];
 
@@ -32,9 +33,12 @@ const datafgetTestSets = async () => {
         }
     });
     popSetDropdown(testSetArray);
+    loading();
 };
 
 const dataFgetTests = async (id) => {
+    loading(true);
+
     await $.post(datafUrls.testData, {id: id}, function(result){
         console.log(result);
             for (dataIndex in result){
@@ -45,4 +49,6 @@ const dataFgetTests = async (id) => {
     }).catch(err => {
       console.log('error')
     });
+
+    loading();
 };
