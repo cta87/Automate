@@ -1,3 +1,5 @@
+console.log("loading results.js");
+
 $(document).ready(()=>{
     console.log("Jquery ready");
 
@@ -35,35 +37,31 @@ $(document).ready(()=>{
 
         console.log(id);
 
-        if(true === false){
+        dataFgetTests(id);
 
-        } else {
-            let data = JSON.parse(dummyData3[id].results_json);
-
-            for (dataIndex in data){
-
-                addTestRows(data[dataIndex]);
-            }
-        }
+        // if(true === false){
+        //
+        // } else {
+        //     let data = JSON.parse(dummyData3[id].results_json);
+        //
+        //     for (dataIndex in data){
+        //
+        //         addTestRows(data[dataIndex]);
+        //     }
+        // }
 
 
     });
 
 
     // Page load Code
+    datafgetTestSets();
 
-    let testSetArray = [];
+    //todo add code here to check for new test sets at intervals, look for new ids
 
-    for (dataIndex in dummyData3){
-
-        testSetArray.push(dummyData3[dataIndex].name);
-
-        addTestSetCard(dummyData3[dataIndex]);
-    }
-
-
-    popSetDropdown(testSetArray);  // run function that populates the test-set name select dropdown, should only contain unique values
-
+    // $.post('http://10.36.250.112:8086/testsetdata/json', {id: 50}, function(result){
+    //     console.log(result);
+    // });
 
 });
 
@@ -71,7 +69,6 @@ $(document).ready(()=>{
 
 // ============================== Element templates (use .clone() to copy them) ===============================
 
-// const noteTemplate = $("<td></td>").append($("<input>").attr("type", 'input'), $("<button></button>").text("Update").addClass('btn btn-success'));
 const noteTemplate = $("<td></td>").append($("<input>").attr("type", 'input'));
 
 // ============================== Functions to create HTML elements ===============================
@@ -117,13 +114,13 @@ const addTestRows = (testObj) =>{
     //Create log list element
     let logList = $("<ol></ol>");
 
-    if(testObj.log){  // if log exists
-        for (logIndex in testObj.log){
-            logList.append($("<li></li>").text(testObj.log[logIndex]));
+    if(testObj.logs){  // if log exists
+        for (logIndex in testObj.logs){
+            logList.append($("<li></li>").text(testObj.logs[logIndex]));
         }
 
         // append row data to row
-        summaryRow.append($('<td></td>').addClass('text-center sumrow btn-light text-info').text("(" + testObj.log.length + ")"), tdName, tdDesc, tdResult, tdNote, tdReview);
+        summaryRow.append($('<td></td>').addClass('text-center sumrow btn-light text-info').text("(" + testObj.logs.length + ")"), tdName, tdDesc, tdResult, tdNote, tdReview);
     } else {
         summaryRow.append($('<td></td>').addClass('text-center sumrow btn-light text-info').text("(N/A)"), tdName, tdDesc, tdResult, tdNote, tdReview);
     }

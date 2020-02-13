@@ -3,19 +3,20 @@ console.log("loading data-fetch.js");
 const datafServ = "http://10.36.250.112:8086";
 
 const datafUrls ={
-  last5: datafServ + "/testset/5",
+    last5: datafServ + "/testset/5",
+    testData: datafServ + "/testsetdata/json",
 };
 
 
 // =============================== Functions ======================================
 
 
-
+// Function get the last 5 test sets and populates the test set table
 const datafgetTestSets = async () => {
 
     let testSetArray = [];
 
-    await $.get('http://10.36.250.112:8086/testset/5', function( data ) {
+    await $.get(datafUrls.last5, function( data ) {
 
         for (dataIndex in data){
             testSetArray.push(data[dataIndex].name);
@@ -30,7 +31,18 @@ const datafgetTestSets = async () => {
             addTestSetCard(dummyData3[dataIndex]);
         }
     });
-
     popSetDropdown(testSetArray);
+};
 
+const dataFgetTests = async (id) => {
+    await $.post(datafUrls.testData, {id: id}, function(result){
+        console.log(result);
+            for (dataIndex in result){
+
+                addTestRows(result[dataIndex]);
+            }
+
+    }).catch(err => {
+      console.log('error')
+    });
 };
