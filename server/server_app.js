@@ -14,6 +14,10 @@ fastify.register(require('fastify-formbody')); // allows x-www-form-urlencoded
 const dbName = "NZTA_Database";
 const queries = {
     testSetsLast5:   'SELECT id, start_time, end_time, name, build_name, status, pass, fail, error FROM automated_tests ORDER BY id DESC LIMIT 5;',
+    testSets2:   'SELECT id, start_time, end_time, name, build_name, status, pass, fail, error FROM automated_tests ORDER BY id DESC LIMIT 5, 5;',
+    testSets3:   'SELECT id, start_time, end_time, name, build_name, status, pass, fail, error FROM automated_tests ORDER BY id DESC LIMIT 10, 5;',
+    testSets4:   'SELECT id, start_time, end_time, name, build_name, status, pass, fail, error FROM automated_tests ORDER BY id DESC LIMIT 15, 5;',
+    testSets5:   'SELECT id, start_time, end_time, name, build_name, status, pass, fail, error FROM automated_tests ORDER BY id DESC LIMIT 20, 5;',
     jsonData: function (id){return 'SELECT results_json FROM automated_tests WHERE id = ' + id + ';'},
 
 };
@@ -48,9 +52,30 @@ async function dbOpenQryClose(dbName, qry) {
 // =========================== fastify routes and code =====================================
 
 // get last 5 test sets
-fastify.get('/testset/5', async function (request, reply) {
+fastify.get('/testset/1', async function (request, reply) {
     reply.send(await dbOpenQryClose(dbName, queries.testSetsLast5))
 });
+
+// get test 5-10
+fastify.get('/testset/2', async function (request, reply) {
+    reply.send(await dbOpenQryClose(dbName, queries.testSets2))
+});
+
+// get test 11-15
+fastify.get('/testset/3', async function (request, reply) {
+    reply.send(await dbOpenQryClose(dbName, queries.testSets3))
+});
+
+// get test 16-20
+fastify.get('/testset/4', async function (request, reply) {
+    reply.send(await dbOpenQryClose(dbName, queries.testSets4))
+});
+
+// get test 21-25
+fastify.get('/testset/5', async function (request, reply) {
+    reply.send(await dbOpenQryClose(dbName, queries.testSets5))
+});
+
 
 // get results json data from a test-set based on test set ID
 fastify.post('/testsetdata/json', async function (request, reply) {

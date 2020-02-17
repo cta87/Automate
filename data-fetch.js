@@ -3,7 +3,7 @@ console.log("loading data-fetch.js");
 const datafServ = "http://10.36.250.112:8086";
 
 const datafUrls ={
-    last5: datafServ + "/testset/5",
+    last5: datafServ + "/testset/1",
     testData: datafServ + "/testsetdata/json",
 };
 
