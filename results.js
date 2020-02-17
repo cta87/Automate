@@ -17,10 +17,7 @@ $(document).ready(()=>{
     $("#tstset-card-container").on('click', '.open-ts', (event)=>{
 
 
-
-        //add background color
-
-
+        //remove blue border from all cards, change background to white for all cards (removing blue background)
         $('.open-ts').each(function() {
             $(this).removeClass('border-primary').css("background-color", "white");
 
@@ -28,16 +25,16 @@ $(document).ready(()=>{
 
         //add background color
         $(event.currentTarget).css("background-color", "lightblue");
-
         //add blue border around card that is open
         $(event.currentTarget).addClass('border-primary');
 
 
+        // remove all old tests from test table
+        $('#resultTable').children("tbody").empty();
+
+
         const id = $(event.currentTarget).prop("id");
-
-        //get data from mysql using id
-
-        // if mysql unavailable then use dummy data
+        //get data from mysql using id (if mysql unavailable then use dummy data)
 
         dataFgetTests(id);
 
@@ -49,9 +46,6 @@ $(document).ready(()=>{
 
     //todo add code here to check for new test sets at intervals, look for new ids
 
-    // $.post('http://10.36.250.112:8086/testsetdata/json', {id: 50}, function(result){
-    //     console.log(result);
-    // });
 
 });
 
