@@ -13,29 +13,33 @@ $(document).ready(()=>{
     });
 
 
+    // below function populates the test table when a test-set card is clicked
+    $("#tstset-card-container").on('click', '.open-ts', (event)=>{
 
-    // below function populates the test table when a test-set is clicked
-    $("#tstset-card-container").on('click', '.open-test-set', (event)=>{
+
+
+        //add background color
+
+
+        $('.open-ts').each(function() {
+            $(this).removeClass('border-primary').css("background-color", "white");
+
+        });
+
+        //add background color
+        $(event.currentTarget).css("background-color", "lightblue");
 
         //add blue border around card that is open
-        console.log($(event.currentTarget).parent().parent().parent().addClass('border-primary'));
+        $(event.currentTarget).addClass('border-primary');
 
-        // remove blue border off all other cards
-
-        $(event.currentTarget).text("Opened");
-
-        $(event.currentTarget).removeClass('btn-secondary').addClass('btn-primary');
 
         const id = $(event.currentTarget).prop("id");
 
         //get data from mysql using id
 
-            // if mysql unavalible then use dummy data
-
-        console.log(id);
+        // if mysql unavailable then use dummy data
 
         dataFgetTests(id);
-
 
     });
 
@@ -124,7 +128,7 @@ const addTestSetCard = (testSetObj) =>{
     let container = $('#tstset-card-container');
 
     // create card
-    let cardContainer = $("<div></div>").addClass('card m-2');
+    let cardContainer = $("<div></div>").addClass('card m-2 open-ts').prop("id", testSetObj.id).css('cursor', 'pointer').css("border-width", "3px");
 
     // create card header
     let cardHead = $("<div></div>").addClass('card-header').text(testSetObj.name);
@@ -141,11 +145,9 @@ const addTestSetCard = (testSetObj) =>{
         let passP = $('<p></p>').addClass('card-text text-success font-weight-bold text-center m-0').text("Pass: " +  testSetObj.pass);
         let errorP = $('<p></p>').addClass('card-text text-warning font-weight-bold text-center m-0').text("Error: " +  testSetObj.error);
 
-        // create open button
-        let openBtn = $("<div></div>").addClass("row justify-content-center mt-2").append($("<button></button>").addClass("btn btn-secondary stretched-link open-test-set").text("Open").prop("id", testSetObj.id));
 
         // create card with all appended children
-    cardContainer.append(cardHead, cardBody.append(dateP, statusP, buildP, failP, passP, errorP, openBtn));
+    cardContainer.append(cardHead, cardBody.append(dateP, statusP, buildP, failP, passP, errorP));
     container.append(cardContainer);
 
 
