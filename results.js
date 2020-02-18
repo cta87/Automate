@@ -41,8 +41,39 @@ $(document).ready(()=>{
     });
 
 
-    // Page load Code
-    datafgetTestSets();
+    $("#test-set-group-select").on('click', 'button', (event)=>{
+
+        $(event.currentTarget).parent().parent().children("li").removeClass('active');
+        $(event.currentTarget).parent().addClass('active');
+
+        // remove existing test set cards
+        $("#tstset-card-container").empty();
+
+        // get the test-set group based on the button text value. ie. 1 gets group1 and run the function to retrieve backend data and populate test-set cards
+        switch ($(event.currentTarget).text()){
+            case '1':
+                datafgetTestSets(datafUrls.testSet1);
+                break;
+            case '2':
+                datafgetTestSets(datafUrls.testSet2);
+                break;
+            case '3':
+                datafgetTestSets(datafUrls.testSet3);
+                break;
+            case '4':
+                datafgetTestSets(datafUrls.testSet4);
+                break;
+            case '5':
+                datafgetTestSets(datafUrls.testSet5);
+                break;
+        }
+
+    });
+
+
+
+        // Page load Code
+    datafgetTestSets(datafUrls.testSet1);
 
     //todo add code here to check for new test sets at intervals, look for new ids
 

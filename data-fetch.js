@@ -3,7 +3,11 @@ console.log("loading data-fetch.js");
 const datafServ = "http://10.36.250.112:8086";
 
 const datafUrls ={
-    last5: datafServ + "/testset/1",
+    testSet1: datafServ + "/testset/1",
+    testSet2: datafServ + "/testset/2",
+    testSet3: datafServ + "/testset/3",
+    testSet4: datafServ + "/testset/4",
+    testSet5: datafServ + "/testset/5",
     testData: datafServ + "/testsetdata/json",
 };
 
@@ -12,12 +16,12 @@ const datafUrls ={
 
 
 // Function get the last 5 test sets and populates the test set table
-const datafgetTestSets = async () => {
+const datafgetTestSets = async (testSetUrl) => {
     loading(true);
 
     let testSetArray = [];
 
-    await $.get(datafUrls.last5, function( data ) {
+    await $.get(testSetUrl, function( data ) {
 
         for (dataIndex in data){
             testSetArray.push(data[dataIndex].name);
