@@ -71,15 +71,29 @@ $(document).ready(()=>{
     });
 
 
+    //jquery click function to refresh test set when 'refresh' button is clicked
+    $("#test-set-refresh").on('click', (event)=>{
+
+        // remove existing test set cards
+        $("#tstset-card-container").empty();
+
+        // get 5 latests test-sets
+        datafgetTestSets(datafUrls.testSet1);
+    });
+
 
         // Page load Code
     datafgetTestSets(datafUrls.testSet1);
+
+    setInterval(function(){
+        console.log('test');
+
+    }, 3000);
 
     //todo add code here to check for new test sets at intervals, look for new ids
 
 
 });
-
 
 
 // ============================== Element templates (use .clone() to copy them) ===============================
