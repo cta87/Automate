@@ -85,8 +85,17 @@ $(document).ready(()=>{
         // Page load Code
     datafgetTestSets(datafUrls.testSet1);
 
-    setInterval(function(){
-        console.log('test');
+    setInterval(async function(){
+        let newSetId = await datafIdWatch();
+
+        if (newSetId > latestSetId){
+            console.log('New complete test set found');
+            //todo add toast code
+            //todo update Exectuted test sets
+
+            latestSetId = newSetId;
+        }
+
 
     }, 3000);
 
