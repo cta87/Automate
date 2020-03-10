@@ -85,15 +85,20 @@ $(document).ready(()=>{
         // Page load Code
     datafgetTestSets(datafUrls.testSet1);
 
+    // ============================== interval functions =========================
     setInterval(async function(){
         let newSetId = await datafIdWatch();
 
         if (newSetId > latestSetId){
             console.log('New complete test set found');
             //todo add toast code
+            $('.toast-body').text('New completed test set found:');
+            $('.toast').toast('show');
             //todo update Exectuted test sets
 
-            latestSetId = newSetId;
+            $("#tstset-card-container").empty();
+            datafgetTestSets(datafUrls.testSet1);
+
         }
 
 

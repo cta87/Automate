@@ -67,6 +67,8 @@ const datafgetTestSets = async (testSetUrl) => {
 
 const dataFgetTests = async (id) => {
     loading(true);
+    $('.toast-body').text('Retrieving tests for Test-Set (' + id + '):');
+    $('.toast').toast('show');
 
     await $.post(datafUrls.testData, {id: id}, function(result){
         console.log(result);
