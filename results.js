@@ -143,9 +143,11 @@ const addTestRows = (testObj) =>{
 
     //Switch statement that sets the color of the result based whether it is a pass/fail/error
     switch (testObj.result){
+        case 'pass':
         case 'Pass':
             tdResult.addClass('text-success');
             break;
+        case 'fail':
         case 'Fail':
             tdResult.addClass('text-danger');
             break;
